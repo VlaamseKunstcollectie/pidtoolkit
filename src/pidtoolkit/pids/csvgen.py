@@ -4,10 +4,10 @@ import configparser
 import csv
 from datetime import date
 
-from pidtoolkit.pids.culturize.culturizegen import generate_arthub_pid, generate_datahub_pid, generate_datahub_redirect, \
+from pids.culturize.culturizegen import generate_arthub_pid, generate_datahub_pid, generate_datahub_redirect, \
     generate_data_redirect
-from pidtoolkit.pids.pidgen.general import replace_unsafe_chars, get_number_from_pid, get_source_from_pid
-from pidtoolkit.pids.pidgen.museum import generate_ident_pid, generate_data_pid, generate_rep_pid
+from pids.pidgen.general import replace_unsafe_chars, get_number_from_pid, get_source_from_pid
+from pids.pidgen.museum import generate_ident_pid, generate_data_pid, generate_rep_pid
 
 
 def generate_pid_csv(import_file: str, export_file: str, config_file: str):

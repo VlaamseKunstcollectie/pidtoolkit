@@ -3,7 +3,7 @@
 from argparse import ArgumentParser
 from os import path
 
-from pidtoolkit.csvgen import generate_pid_csv, generate_culturize_csv
+from pids.csvgen import generate_pid_csv, generate_culturize_csv
 
 
 def main(args):
