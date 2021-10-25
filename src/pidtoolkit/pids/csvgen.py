@@ -11,33 +11,127 @@ from pids.culturize.culturizegen import generate_arthub_pid, generate_datahub_pi
     generate_data_redirect
 
 
+# def generate_pid_csv(import_file: str, export_file: str, config_file: str):
+#     config = configparser.ConfigParser()
+#     config.read(config_file)
+#
+#     base_url = config.get('PID', 'BASE_URL')
+#     pid_pattern = config.get('PID', 'PATTERN')
+#     oslo_pids = config.getboolean('PID', 'OSLO')
+#     pid_concept = config.get('PID', 'CONCEPT')
+#
+#     priref_field = config.get('PID_IMPORT', 'PRIREF')
+#     obj_number_field = config.get('PID_IMPORT', 'OBJ_NUMBER')
+#     institution_field = config.get('PID_IMPORT', 'INSTITUTION')
+#     division_field = config.get('PID_IMPORT', 'DIVISION')
+#     inst_has_divisions = config.getboolean('PID_IMPORT', 'INST_DIVISIONS')
+#     inst_from_field = config.getboolean('PID_IMPORT', 'INST_FROM_FIELD')
+#     include_adlib = config.getboolean('PID_EXPORT', 'INCLUDE_ADLIB')
+#
+#     if include_adlib:
+#         generation_date = date.today().strftime("%Y-%m-%d")
+#
+#         if not inst_from_field:
+#             institution = config.get('PID_EXPORT', 'INSTITUTION_NAME')
+#         else:
+#             institution = ""
+#
+#     import_encoding = config.get('PID_IMPORT', 'ENCODING')
+#
+#     csv_contents = csv.DictReader(open(import_file, encoding=import_encoding))
+#
+#     with open(export_file, 'w') as output_file:
+#         if include_adlib:
+#             fields = [
+#                 "priref",
+#                 "object_number",
+#                 "websafe_obj_number",
+#                 "date",
+#                 "institution",
+#                 "ident_pid",
+#                 "ident_pid.type",
+#                 "data_pid",
+#                 "data_pid.type",
+#                 "rep_pid",
+#                 "rep_pid.type",
+#                 "doc_pid",
+#                 "doc_pid.type"
+#             ]
+#             export_row = {
+#                 "priref": "",
+#                 "object_number": "",
+#                 "websafe_obj_number": "",
+#                 "date": generation_date,
+#                 "institution": institution,
+#                 "ident_pid": "",
+#                 "ident_pid.type": "identifierpid",
+#                 "data_pid": "",
+#                 "data_pid.type": "datapid",
+#                 "rep_pid": "",
+#                 "rep_pid.type": "representationpid",
+#                 "doc_pid": "",
+#                 "doc_pid.type": "docpid"
+#             }
+#         else:
+#             fields = [
+#                 "priref",
+#                 "object_number",
+#                 "websafe_obj_number",
+#                 "ident_pid",
+#                 "ident_pid.type",
+#                 "data_pid",
+#                 "data_pid.type",
+#                 "rep_pid",
+#                 "rep_pid.type",
+#                 "doc_pid",
+#                 "doc_pid.type"
+#             ]
+#             export_row = {
+#                 "priref": "",
+#                 "object_number": "",
+#                 "websafe_obj_number": "",
+#                 "ident_pid": "",
+#                 "ident_pid.type": "identifierpid",
+#                 "data_pid": "",
+#                 "data_pid.type": "datapid",
+#                 "rep_pid": "",
+#                 "rep_pid.type": "representationpid",
+#                 "doc_pid": "",
+#                 "doc_pid.type": "docpid"
+#             }
+#         writer = csv.DictWriter(output_file, fieldnames=fields)
+#         writer.writeheader()
+#         for import_row in csv_contents:
+#             pid_number = replace_unsafe_chars(import_row[obj_number_field])
+#
+#             export_row["priref"] = import_row[priref_field]
+#             export_row["object_number"] = import_row[obj_number_field]
+#             export_row["websafe_obj_number"] = pid_number
+#
+#             if oslo_pids:
+#                 export_row["ident_pid"] = generate_oslo_pid(pid_number, base_url, pid_concept, "id")
+#                 export_row["data_pid"] = generate_oslo_pid(pid_number, base_url, pid_concept, "data")
+#                 export_row["rep_pid"] = generate_oslo_pid(pid_number, base_url, pid_concept, "representation")
+#                 export_row["doc_pid"] = generate_oslo_pid(pid_number, base_url, pid_concept, "doc")
+#
+#             else:
+#                 export_row["ident_pid"] = generate_meemoo_pid(pid_number, base_url, pid_concept, "id",
+#                                                              pid_pattern)
+#                 export_row["data_pid"] = generate_meemoo_pid(pid_number, base_url, pid_concept, "data",
+#                                                            pid_pattern)
+#                 export_row["rep_pid"] = generate_meemoo_pid(pid_number, base_url, pid_concept, "representation",
+#                                                          pid_pattern)
+#             if include_adlib:
+#                 if inst_from_field and inst_has_divisions:
+#                     export_row["institution"] = import_row[institution_field] \
+#                                                 + " - " + import_row[division_field]
+#                 elif inst_from_field:
+#                     export_row["institution"] = import_row[institution_field]
+#
+#             writer.writerow(export_row)
+
 def generate_pid_csv(import_file: str, export_file: str, config_file: str):
-    #TODO: conditionals for PIDs
-    config = configparser.ConfigParser()
-    config.read(config_file)
-
-    base_url = config.get('PID', 'BASE_URL')
-    pid_pattern = config.get('PID', 'PATTERN')
-    oslo_pids = config.getboolean('PID', 'OSLO')
-    pid_concept = config.get('PID', 'CONCEPT')
-
-    priref_field = config.get('PID_IMPORT', 'PRIREF')
-    obj_number_field = config.get('PID_IMPORT', 'OBJ_NUMBER')
-    institution_field = config.get('PID_IMPORT', 'INSTITUTION')
-    division_field = config.get('PID_IMPORT', 'DIVISION')
-    inst_has_divisions = config.getboolean('PID_IMPORT', 'INST_DIVISIONS')
-    inst_from_field = config.getboolean('PID_IMPORT', 'INST_FROM_FIELD')
-    include_adlib = config.getboolean('PID_EXPORT', 'INCLUDE_ADLIB')
-
-    if include_adlib:
-        generation_date = date.today().strftime("%Y-%m-%d")
-
-        if not inst_from_field:
-            institution = config.get('PID_EXPORT', 'INSTITUTION_NAME')
-        else:
-            institution = ""
-
-    import_encoding = config.get('PID_IMPORT', 'ENCODING')
+    # TODO: read json configuration
 
     csv_contents = csv.DictReader(open(import_file, encoding=import_encoding))
 
@@ -49,14 +143,6 @@ def generate_pid_csv(import_file: str, export_file: str, config_file: str):
                 "websafe_obj_number",
                 "date",
                 "institution",
-                "ident_pid",
-                "ident_pid.type",
-                "data_pid",
-                "data_pid.type",
-                "rep_pid",
-                "rep_pid.type",
-                "doc_pid",
-                "doc_pid.type"
             ]
             export_row = {
                 "priref": "",
@@ -64,44 +150,27 @@ def generate_pid_csv(import_file: str, export_file: str, config_file: str):
                 "websafe_obj_number": "",
                 "date": generation_date,
                 "institution": institution,
-                "ident_pid": "",
-                "ident_pid.type": "identifierpid",
-                "data_pid": "",
-                "data_pid.type": "datapid",
-                "rep_pid": "",
-                "rep_pid.type": "representationpid",
-                "doc_pid": "",
-                "doc_pid.type": "docpid"
             }
         else:
             fields = [
                 "priref",
                 "object_number",
                 "websafe_obj_number",
-                "ident_pid",
-                "ident_pid.type",
-                "data_pid",
-                "data_pid.type",
-                "rep_pid",
-                "rep_pid.type",
-                "doc_pid",
-                "doc_pid.type"
             ]
             export_row = {
                 "priref": "",
                 "object_number": "",
                 "websafe_obj_number": "",
-                "ident_pid": "",
-                "ident_pid.type": "identifierpid",
-                "data_pid": "",
-                "data_pid.type": "datapid",
-                "rep_pid": "",
-                "rep_pid.type": "representationpid",
-                "doc_pid": "",
-                "doc_pid.type": "docpid"
             }
+        for type in pid_types:
+            fields.append(f"{type}_pid")
+            fields.append(f"{type}_pid.type")
+            export_row[f"{type}_pid"] = ""
+            export_row[f"{type}_pid"] = f"{type}pid"
+
         writer = csv.DictWriter(output_file, fieldnames=fields)
         writer.writeheader()
+
         for import_row in csv_contents:
             pid_number = replace_unsafe_chars(import_row[obj_number_field])
 
@@ -109,19 +178,6 @@ def generate_pid_csv(import_file: str, export_file: str, config_file: str):
             export_row["object_number"] = import_row[obj_number_field]
             export_row["websafe_obj_number"] = pid_number
 
-            if oslo_pids:
-                export_row["ident_pid"] = generate_oslo_pid(pid_number, base_url, pid_concept, "id")
-                export_row["data_pid"] = generate_oslo_pid(pid_number, base_url, pid_concept, "data")
-                export_row["rep_pid"] = generate_oslo_pid(pid_number, base_url, pid_concept, "representation")
-                export_row["doc_pid"] = generate_oslo_pid(pid_number, base_url, pid_concept, "doc")
-
-            else:
-                export_row["ident_pid"] = generate_meemoo_pid(pid_number, base_url, pid_concept, "id",
-                                                             pid_pattern)
-                export_row["data_pid"] = generate_meemoo_pid(pid_number, base_url, pid_concept, "data",
-                                                           pid_pattern)
-                export_row["rep_pid"] = generate_meemoo_pid(pid_number, base_url, pid_concept, "representation",
-                                                         pid_pattern)
             if include_adlib:
                 if inst_from_field and inst_has_divisions:
                     export_row["institution"] = import_row[institution_field] \
@@ -129,7 +185,14 @@ def generate_pid_csv(import_file: str, export_file: str, config_file: str):
                 elif inst_from_field:
                     export_row["institution"] = import_row[institution_field]
 
+            if oslo_pids:
+                for type in pid_types:
+                    export_row[f"{type}_pid"] = generate_oslo_pid(pid_number, base_url, pid_concept, type)
+            else:
+                export_row[f"{type}_pid"] = generate_meemoo_pid(pid_number, base_url, pid_concept, type, pid_pattern)
+
             writer.writerow(export_row)
+
 
 
 def generate_culturize_csv(import_file: str, export_file: str, config_file: str):
