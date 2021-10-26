@@ -8,6 +8,7 @@
   },
   "file": {
     "encoding": "utf-sig-8", //  encoding for the CSV file containing object numbers. Adlib-generated CSV files have the encoding 'utf-8-sig'
+    "has_record_numbers": true, // are record numbers included in the CSV
     "record_numbers": "record_number", // column containing record ID numbers. This allows easy importing into collection management systems
     "object_numbers": "object_number", // colunm containing object numbers
     "include_adlib_ei": true, // include institution name and date as required for Adlib via ErfgoedInzicht
@@ -18,9 +19,9 @@
     "department": "department_name" // column containing department
   },
   "culturize": {
-    "arthub_url": "https://arthub.vlaamsekunstcollectie.be/ ", // base URL for the Arthub
+    "arthub_url": "https://arthub.vlaamsekunstcollectie.be/", // base URL for the Arthub
     "arthub_lang": "nl", // language variant to use for Arthub
-    "datahub_url": "https://datahub.vlaamsekunstcollectie.be/ ", // base URL for the Datahub
+    "datahub_url": "https://datahub.vlaamsekunstcollectie.be/", // base URL for the Datahub
     "data_to_datahub": false // should data PID redirect to Datahub instead of Arthub
   }
 }
