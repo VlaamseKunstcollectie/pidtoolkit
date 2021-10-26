@@ -11,7 +11,7 @@ def generate_arthub_pid(pid_number: str, data_source: str) -> str:
     Takes a PID number and a PID source and generates an Arthub identifier PID.
     """
 
-    return tldextract.extract(urllib.parse.urlparse(data_source).netloc).domain + ":" + pid_number
+    return data_source + ":" + pid_number
 
 
 def generate_datahub_pid(pid_number: str, data_pid: str, datahub_url: str) -> str:
