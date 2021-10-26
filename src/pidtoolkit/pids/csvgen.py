@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 import csv
-from datetime import date
 import json
+from datetime import date
+
 
 from pidgen import replace_unsafe_chars, generate_meemoo_pid, generate_oslo_pid
 from culturize.culturizegen import generate_arthub_pid, generate_datahub_pid, generate_datahub_redirect, \
