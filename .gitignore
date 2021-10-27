@@ -1,6 +1,6 @@
 ### In Development
 src/interface/
-test/
+tst/
 
 ### Python template
 # Byte-compiled / optimized / DLL files
