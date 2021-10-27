@@ -4,12 +4,13 @@ import csv
 import json
 from datetime import date
 
-from pidgen import replace_unsafe_chars, generate_meemoo_pid, generate_oslo_pid
+from pids.pidgen import replace_unsafe_chars, generate_meemoo_pid, generate_oslo_pid
 
 
 def generate_pid_csv(import_file: str, export_file: str, config_file: str):
     # Import configuration from JSON file
-    config = json.load(config_file)
+    json_file = open(config_file,)
+    config = json.load(json_file)
 
     # PID format configuration
     oslo_pids = True if config['syntax'] == "oslo" else False
@@ -60,7 +61,7 @@ def generate_pid_csv(import_file: str, export_file: str, config_file: str):
             export_row["institution"] = ""
         for type in pid_types:
             export_row[f"{type}_pid"] = ""
-            export_row[f"{type}_pid"] = f"{type}pid"
+            export_row[f"{type}_pid.type"] = ""
 
         # create CSV file
         writer = csv.DictWriter(output_file, fieldnames=fields)
@@ -71,7 +72,7 @@ def generate_pid_csv(import_file: str, export_file: str, config_file: str):
             pid_number = replace_unsafe_chars(import_row[obj_number_field])
 
             if has_priref:
-                export_row["priref"] = import_row[priref_field]
+                export_row["record_number"] = import_row[priref_field]
 
             export_row["object_number"] = import_row[obj_number_field]
             export_row["websafe_obj_number"] = pid_number
@@ -90,8 +91,10 @@ def generate_pid_csv(import_file: str, export_file: str, config_file: str):
             if oslo_pids:
                 for type in pid_types:
                     export_row[f"{type}_pid"] = generate_oslo_pid(pid_number, base_url, pid_concept, type)
+                    export_row[f"{type}_pid.type"] = f"{type}pid"
             else:
                 for type in pid_types:
                     export_row[f"{type}_pid"] = generate_meemoo_pid(pid_number, base_url, pid_concept, type, pid_pattern)
+                    export_row[f"{type}_pid.type"] = f"{type}pid"
 
             writer.writerow(export_row)

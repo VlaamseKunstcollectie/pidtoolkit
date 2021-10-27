@@ -1,20 +1,17 @@
 {
-  "pid_format": {
-    "syntax": "meemoo", // meemoo or oslo
-    "types": ["id", "data", "representation", "doc"], // any of these can be left out
-    "base_url": "http://www.vlaamsekunstcollectie.be/", // base URL for PIDs
-    "concept": "work", // concept to be used when making PIDs
-    "path": "/collection/" // additional path elements between the base URL and concept. Ignored if syntax is oslo
-  },
-  "file": {
-    "encoding": "utf-sig-8", //  encoding for the CSV file containing object numbers. Adlib-generated CSV files have the encoding 'utf-8-sig'
-    "record_numbers": "record_number", // column containing record ID numbers. This allows easy importing into collection management systems
-    "object_numbers": "object_number", // colunm containing object numbers
-    "include_adlib_ei": true, // include institution name and date as required for Adlib via ErfgoedInzicht
-    "institution_field": true, // institution name from field
-    "institution": "institution_name", // column containing institution
-    "institution_name": "Vlaamse Kunstcollectie", // institution name to use if institution_field is false
-    "department_field": false, // does the institution have departements that should be included with the institution
-    "department": "department_name" // column containing department
-  }
+  "syntax": "meemoo",
+  "types": ["id", "data", "representation", "doc"],
+  "base_url": "http://www.vlaamsekunstcollectie.be/",
+  "concept": "work",
+  "path": "/collection/",
+  "encoding": "utf-8-sig",
+  "has_record_numbers": true,
+  "record_numbers": "priref",
+  "object_numbers": "object_number",
+  "include_adlib_ei": true,
+  "institution_field": true,
+  "institution": "institution.name",
+  "institution_name": "Vlaamse Kunstcollectie",
+  "department_field": true,
+  "department": "administration_name"
 }
