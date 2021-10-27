@@ -16,11 +16,5 @@
     "institution_name": "Vlaamse Kunstcollectie", // institution name to use if institution_field is false
     "department_field": false, // does the institution have departements that should be included with the institution
     "department": "department_name" // column containing department
-  },
-  "culturize": {
-    "arthub_url": "https://arthub.vlaamsekunstcollectie.be/ ", // base URL for the Arthub
-    "arthub_lang": "nl", // language variant to use for Arthub
-    "datahub_url": "https://datahub.vlaamsekunstcollectie.be/ ", // base URL for the Datahub
-    "data_to_datahub": false // should data PID redirect to Datahub instead of Arthub
   }
 }
