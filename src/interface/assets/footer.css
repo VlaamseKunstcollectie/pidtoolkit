@@ -1,0 +1,32 @@
+@import "typography.css";
+
+.app-footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #134E87;
+    border-top: 2px solid #AF8917;
+    margin-left: -8px;
+}
+
+
+.app-footer--content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.app-footer--logo{
+    padding-top: 10px;
+    padding-left: 25px;
+}
+
+.app-footer--text{
+    height: 100px;
+    padding-top: 40px;
+    padding-right: 25px;
+    line-height: 10px;
+    font-family: 'Lora';
+    font-size: 20px;
+    color: #fff
+}

@@ -1,0 +1,29 @@
+input[type=text] {
+    padding: 5px 10px;
+    margin: 2px 0;
+    box-sizing: border-box;
+}
+
+input[type=text]:focus {
+    width: 100%;
+    border: 3px solid #AF8917;
+}
+
+input[type=checkbox]{
+    margin-right: 7px;
+}
+
+input[type=radio]{
+    margin-right: 7px;
+}
+
+label{
+    margin-right: 25px;
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 600px) {
+    label{
+        margin-right: 10px;
+    }
+}

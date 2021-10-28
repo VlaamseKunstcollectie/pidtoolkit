@@ -1,0 +1,43 @@
+@import "typography.css";
+
+.app-body{
+    padding-left: 25px;
+}
+
+.app-body--pidformat{
+    display: flex;
+    flex-direction: column;
+}
+
+.app-body--selections{
+    display: flex;
+    max-width: 1000px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.app-body--textfields{
+    display: flex;
+    max-width: 1300px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 25px;
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 900px) {
+    .app-body--selections, .app-body--textfields{
+        flex-direction: column;
+    }
+}
+
+.app-body--pidexample{
+    line-height: 10px;
+    padding-top: 25px;
+}
+
+.app-body--file{
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+}

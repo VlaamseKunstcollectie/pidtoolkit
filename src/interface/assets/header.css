@@ -1,0 +1,53 @@
+@import "typography.css";
+
+.app-header {
+    display: flex;
+    height: 100px;
+    border-bottom: 1px solid #AF8917;
+}
+
+.app-header--logo{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+}
+
+.app-header--titlewrap{
+    height: 100px;
+    padding-left: 50px;
+    padding-bottom: 10px;
+    padding-right: 25px;
+    line-height: 10px;
+}
+
+.app-header--title{
+    font-size: 20px;
+}
+
+.app-header--subtitle{
+    font-family: 'Lora';
+    font-size: 20px;
+}
+
+@media (max-width: 800px) {
+    .app-header--title{
+        font-size: 15px;
+        line-height: 20px;
+    }
+    .app-header--subtitle{
+        font-size: 15px;
+        margin-top: -10px;
+  }
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 660px) {
+    .app-header--title{
+        font-size: 10px;
+        line-height: 20px;
+    }
+    .app-header--subtitle{
+        font-size: 10px;
+        margin-top: -10px;
+    }
+}
