@@ -1,17 +1,20 @@
 {
-  "syntax": "meemoo",
-  "types": ["id", "data", "representation", "doc"],
-  "base_url": "http://www.vlaamsekunstcollectie.be/",
-  "concept": "work",
-  "path": "/collection/",
-  "encoding": "utf-8-sig",
-  "has_record_numbers": true,
-  "record_numbers": "priref",
-  "object_numbers": "object_number",
-  "include_adlib_ei": true,
-  "institution_field": true,
-  "institution": "institution.name",
-  "institution_name": "Vlaamse Kunstcollectie",
-  "department_field": true,
-  "department": "administration_name"
+  // PID format
+  "syntax": "meemoo", // "meemoo" or "oslo"
+  "types": ["id", "data", "representation", "doc"], // can be any type of PID to generate
+  "base_url": "http://www.vlaamsekunstcollectie.be/", // the base URL to use when generating PIDs
+  "concept": "work", // the concept associated with the PIDs
+  "path": "/collection/", // additional path elements between the base URL and the concept, only used with meemoo syntax
+
+  // File configuration
+  "encoding": "utf-8-sig", // the encoding of the CSV file containing object numbers. Adlib exports with utf-8-sig
+  "has_record_numbers": true, // does the CSV file also have record numbers
+  "record_numbers": "priref", // column name with record numbers
+  "object_numbers": "object_number", // column name with object numbers
+  "include_adlib_ei": true, // should the extra fields for Adlib via ErfgoedInzicht be included
+  "institution_field": true, // does the CSV file also have insitution name(s)
+  "institution": "institution.name", // column name with institution name
+  "institution_name": "Vlaamse Kunstcollectie", // institution name if not in CSV
+  "department_field": true, // does the CSV file also have department name(s)
+  "department": "administration_name" // column name with department name
 }

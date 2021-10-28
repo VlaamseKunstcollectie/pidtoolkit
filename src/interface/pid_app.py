@@ -74,6 +74,8 @@ app.layout = html.Div([
         ]),
         html.Div(className='app-body--file', children=[
             html.H2('File options'),
+
+
         ])
     ]),
     html.Footer(className='app-footer', children=[
@@ -101,14 +103,14 @@ def update_output_div(pid_type, base_url, pid_concept, pid_generate, pid_pattern
     id_pid = ""
     data_pid = ""
     doc_pid = ""
-    rep_pid = ""
+    representation_pid = ""
     if pid_type == "oslo":
         if "id" in pid_generate:
             id_pid = re.sub('(?<!ttps:|http:)/{2,}', '/', base_url + "/" + "id" + "/" + pid_concept + "/12345678")
         if "data" in pid_generate:
             data_pid = re.sub('(?<!ttps:|http:)/{2,}', '/', base_url + "/" + "data" + "/" + pid_concept + "/12345678")
-        if "rep" in pid_generate:
-            rep_pid = re.sub('(?<!ttps:|http:)/{2,}', '/', base_url + "/" + "representation" + "/"
+        if "representation" in pid_generate:
+            representation_pid = re.sub('(?<!ttps:|http:)/{2,}', '/', base_url + "/" + "representation" + "/"
                              + pid_concept + "/12345678")
         if "doc" in pid_generate:
             doc_pid = re.sub('(?<!ttps:|http:)/{2,}', '/', base_url + "/" + "doc" + "/" + pid_concept + "/12345678")
@@ -119,8 +121,8 @@ def update_output_div(pid_type, base_url, pid_concept, pid_generate, pid_pattern
         if "data" in pid_generate:
             data_pid = re.sub('(?<!ttps:|http:)/{2,}', '/', base_url + pid_pattern + pid_concept + "/"
                               + "data" + "/12345678")
-        if "rep" in pid_generate:
-            rep_pid = re.sub('(?<!ttps:|http:)/{2,}', '/', base_url + pid_pattern + pid_concept + "/"
+        if "representation" in pid_generate:
+            representation_pid = re.sub('(?<!ttps:|http:)/{2,}', '/', base_url + pid_pattern + pid_concept + "/"
                              + "representation" + "/12345678")
         if "doc" in pid_generate:
             doc_pid = re.sub('(?<!ttps:|http:)/{2,}', '/', base_url + pid_pattern + pid_concept + "/"
@@ -129,13 +131,13 @@ def update_output_div(pid_type, base_url, pid_concept, pid_generate, pid_pattern
         id_pid = ""
         data_pid = ""
         doc_pid = ""
-        rep_pid = ""
+        representation_pid = ""
 
     return html.Div([
         html.H3('Example PIDs:'),
         html.P(f'{id_pid}', style={'padding-left': '25px'}),
         html.P(f'{data_pid}', style={'padding-left': '25px'}),
-        html.P(f'{rep_pid}', style={'padding-left': '25px'}),
+        html.P(f'{representation_pid}', style={'padding-left': '25px'}),
         html.P(f'{doc_pid}', style={'padding-left': '25px'})
     ])
 
