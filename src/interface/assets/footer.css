@@ -1,13 +1,13 @@
 @import "typography.css";
 
 .app-footer{
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     height: 100px;
     background-color: #134E87;
     border-top: 2px solid #AF8917;
-    margin-left: -8px;
+    margin-top: 50px;
 }
 
 
@@ -24,9 +24,15 @@
 .app-footer--text{
     height: 100px;
     padding-top: 40px;
-    padding-right: 25px;
+    padding-right: 30px;
     line-height: 10px;
     font-family: 'Lora';
     font-size: 20px;
     color: #fff
 }
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 660px) {
+    .app-footer--text{
+        font-size: 15px;
+    }
