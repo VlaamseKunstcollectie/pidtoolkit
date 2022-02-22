@@ -24,9 +24,10 @@ def generate_pid_csv(import_file: str, export_file: str, config_file: str):
     has_priref = config['has_record_numbers']
     priref_field = config['record_numbers']
     obj_number_field = config['object_numbers']
-    include_adlib_ei = config['include_adlib_ei']
+    include_websafe_number = config['include_websafe_number']
+    historic_adlib_ei = config['historic_adlib_ei']
 
-    if include_adlib_ei:
+    if historic_adlib_ei:
         inst_from_field = config['institution_field']
         institution_field = config['institution']
         inst_has_divisions = config['department_field']
@@ -37,37 +38,39 @@ def generate_pid_csv(import_file: str, export_file: str, config_file: str):
 
     # Make and export row-by-row a CSV file with PIDs
     with open(export_file, 'w') as output_file:
-        # define field names for header row
+        # define list of field names for the header row
         fields = []
         if has_priref:
             fields.append("record_number")
         fields.append("object_number")
-        fields.append("websafe_obj_number")
-        if include_adlib_ei:
+        if include_websafe_number:
+            fields.append("websafe_obj_number")
+        if historic_adlib_ei:
             fields.append("date")
             fields.append("institution")
         for type in pid_types:
             fields.append(f"{type}_pid")
             fields.append(f"{type}_pid.type")
 
-        # define dictionary for each content row
+        # define dictionary of field-value pairs for the content rows
         export_row = {}
         if has_priref:
             export_row['record_number'] = ""
         export_row["object_number"] = ""
-        export_row["websafe_obj_number"] = ""
-        if include_adlib_ei:
+        if include_websafe_number:
+            export_row["websafe_obj_number"] = ""
+        if historic_adlib_ei:
             export_row["date"] = ""
             export_row["institution"] = ""
         for type in pid_types:
             export_row[f"{type}_pid"] = ""
             export_row[f"{type}_pid.type"] = ""
 
-        # create CSV file
+        # create the CSV file with header row
         writer = csv.DictWriter(output_file, fieldnames=fields)
         writer.writeheader()
 
-        # create content rows
+        # create the content rows
         for import_row in csv_contents:
             pid_number = replace_unsafe_chars(import_row[obj_number_field])
 
@@ -75,9 +78,11 @@ def generate_pid_csv(import_file: str, export_file: str, config_file: str):
                 export_row["record_number"] = import_row[priref_field]
 
             export_row["object_number"] = import_row[obj_number_field]
-            export_row["websafe_obj_number"] = pid_number
 
-            if include_adlib_ei:
+            if include_websafe_number:
+                export_row["websafe_obj_number"] = pid_number
+
+            if historic_adlib_ei:
                 if inst_from_field and inst_has_divisions:
                     export_row["institution"] = import_row[institution_field] \
                                                             + " - " + import_row[division_field]
