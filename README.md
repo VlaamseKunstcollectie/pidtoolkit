@@ -5,6 +5,7 @@ pidtoolkit — generate PIDs for Flemish Museums
 pidtoolkit is a python toolkit for the generation of PIDs for museum objects, using either the syntax for CultURIze or the OSLO standard for persistent URLs.
 
 ## Requirements
+- Python >= 3.9
 - tldextract >= 3.1.2
 
 ## Changelog
